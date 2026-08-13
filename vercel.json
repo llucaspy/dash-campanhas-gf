@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/sponsorship-push",
+      "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/cron/gmail-sync",
+      "schedule": "30 11 * * *"
+    }
+  ]
+}

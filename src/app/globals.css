@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 33% 98%;
+    --foreground: 224 71.4% 4.1%;
+    --border: 220 13% 91%;
+    --primary: 231 100% 61%;
+  }
+}
+
+body {
+  background-color: #F5F7FB;
+  color: #1D1E2C;
+}
+
+* {
+  border-color: #E9EDF5;
+}
+
+.hero-live-surface {
+  background:
+    radial-gradient(circle at 18% 24%, rgba(255, 176, 121, 0.16), transparent 26%),
+    radial-gradient(circle at 78% 30%, rgba(68, 214, 255, 0.20), transparent 31%),
+    linear-gradient(115deg, #0b0d17 0%, #101749 31%, #22338f 58%, #3b64ff 82%, #0f766e 100%);
+  background-size: 150% 150%, 145% 145%, 240% 240%;
+  animation: heroLiveGradient 18s linear infinite;
+}
+
+.hero-glass-tile {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-glass-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(120deg, transparent 10%, rgba(255, 255, 255, 0.08) 45%, transparent 72%);
+  opacity: 0;
+  transform: translateX(-45%);
+  animation: heroTileLight 7s ease-in-out infinite;
+}
+
+.smartcard-critical-pulse {
+  box-shadow:
+    0 0 0 1px rgba(248, 113, 113, 0.22),
+    0 22px 60px rgba(239, 68, 68, 0.18),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  animation: smartcardCriticalGlow 1.9s ease-in-out infinite;
+}
+
+.smartcard-critical-pulse::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  border-radius: inherit;
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  opacity: 0.7;
+  animation: smartcardCriticalRing 1.9s ease-out infinite;
+}
+
+.campaign-progress-fill {
+  transition: width 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.campaign-progress-glint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.58) 48%, transparent 100%);
+  transform: translateX(-115%);
+  animation: campaignProgressGlint 2.4s ease-in-out infinite;
+}
+
+@keyframes heroLiveGradient {
+  0% {
+    background-position: 0% 48%, 100% 35%, 0% 50%;
+  }
+  25% {
+    background-position: 22% 35%, 82% 58%, 45% 62%;
+  }
+  50% {
+    background-position: 58% 70%, 45% 42%, 100% 50%;
+  }
+  75% {
+    background-position: 78% 44%, 28% 76%, 55% 35%;
+  }
+  100% {
+    background-position: 0% 48%, 100% 35%, 0% 50%;
+  }
+}
+
+@keyframes heroShimmer {
+  0% {
+    transform: translateX(-25%) skewX(-20deg);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  58% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: translateX(35%) skewX(-20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes heroTileLight {
+  0%,
+  35% {
+    opacity: 0;
+    transform: translateX(-45%);
+  }
+  52% {
+    opacity: 1;
+  }
+  78%,
+  100% {
+    opacity: 0;
+    transform: translateX(45%);
+  }
+}
+
+@keyframes smartcardCriticalGlow {
+  0%,
+  100% {
+    filter: saturate(1);
+    box-shadow:
+      0 0 0 1px rgba(248, 113, 113, 0.18),
+      0 18px 48px rgba(239, 68, 68, 0.14),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  }
+  50% {
+    filter: saturate(1.18);
+    box-shadow:
+      0 0 0 1px rgba(248, 113, 113, 0.36),
+      0 28px 72px rgba(239, 68, 68, 0.26),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+}
+
+@keyframes smartcardCriticalRing {
+  0% {
+    opacity: 0.58;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.035);
+  }
+}
+
+@keyframes campaignProgressGlint {
+  0%,
+  28% {
+    transform: translateX(-115%);
+    opacity: 0;
+  }
+  46% {
+    opacity: 0.85;
+  }
+  72%,
+  100% {
+    transform: translateX(115%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smartcard-critical-pulse,
+  .smartcard-critical-pulse::before {
+    animation: none;
+  }
+
+  .campaign-progress-fill {
+    transition: none;
+  }
+
+  .campaign-progress-glint {
+    animation: none;
+  }
+}
